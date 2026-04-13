@@ -33,6 +33,7 @@
     "hyperf/process": "~3.0.0",
     "hyperf/redis": "~3.0.0",
     "hyperf/task": "3.0.*",
+    "promphp/prometheus_client_php": "^2.14",
     "ramsey/uuid": "^4.7",
     "smi2/phpclickhouse": "1.5.3"
   },
