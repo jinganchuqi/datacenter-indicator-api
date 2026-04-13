@@ -20,92 +20,174 @@ use Psr\Http\Message\MessageInterface;
 class MetricsController extends AbstractController
 {
     /**
+     * app转化
+     * @return void
+     */
+    public function appConv()
+    {
+
+    }
+
+    /**
+     * 当日发生数据统计
      * @param ResponseInterface $response
      * @return MessageInterface|\Psr\Http\Message\ResponseInterface
      * @throws \Prometheus\Exception\MetricsRegistrationException
      * @throws \Throwable
      */
-    public function appConv(ResponseInterface $response): MessageInterface|\Psr\Http\Message\ResponseInterface
+    public function appDone(ResponseInterface $response): MessageInterface|\Psr\Http\Message\ResponseInterface
     {
-        // 1. 使用内存存储（因为是实时查询，不需要持久化到 Redis）
-        $registry = new CollectorRegistry(new InMemory());
+        // 1. 提前定义步骤映射
+        $steps = [
+            'first_open' => 'first_open',
+            'otp_started' => 'otp_validation_started',
+            'otp_passed' => 'otp_validation_passed',
+            'liveness_started' => 'liveness_validation_started',
+            'liveness_passed' => 'liveness_validation_passed',
+            'ocr_started' => 'id_scan_started',
+            'ocr_passed' => 'id_scan_completed',
+            'register' => 'register',
+        ];
 
-        // 2. 注册指标名称和标签
-        $funnelGauge = $registry->getOrRegisterGauge(
-            'app',
-            'conversion_funnel_count',
-            'App conversion funnel steps count',
-            ['app_id', 'date', 'step']
-        );
+        // 2. 注册指标：标签只定义 [app_id, event]
+        $registry = new CollectorRegistry(new InMemory(), false);
+        $funnelGauge = $registry->getOrRegisterGauge('app', 'done_count', 'app事件发生计数', ['app_id', 'event']);
+        $rateGauge = $registry->getOrRegisterGauge('app', 'done_rate', 'app事件发生率', ['app_id', 'event']);
 
-        $rateGauge = $registry->getOrRegisterGauge(
-            'app',
-            'conversion_rate',
-            'App conversion funnel rates',
-            ['app_id', 'date', 'type']
-        );
-
-        // 3. 执行 ClickHouse SQL (直接引用你提供的逻辑)
-        // 注意：生产环境建议将 dt 范围改为动态（如最近7天），避免扫描全表
+        // 3. 执行 ClickHouse SQL (保持逻辑不变，获取每个app_id最新的数据)
         $sql = "
-            SELECT
-                app_id,
-                first_open_dt,
-                uniqIf(device_uuid, event_name = 'first_open') AS first_open,
-                uniqIf(device_uuid, event_name = 'otp_validation_started') AS otp_started,
-                uniqIf(device_uuid, event_name = 'otp_validation_passed') AS otp_passed,
-                uniqIf(device_uuid, event_name = 'liveness_validation_started') AS liveness_started,
-                uniqIf(device_uuid, event_name = 'liveness_validation_passed') AS liveness_passed,
-                uniqIf(device_uuid, event_name = 'id_scan_started') AS ocr_started,
-                uniqIf(device_uuid, event_name = 'id_scan_completed') AS ocr_passed,
-                uniqIf(device_uuid, event_name = 'mobile_auth_passed' AND fs['auth_type'] = 'signup') AS register
-            FROM (
-                SELECT app_id, device_uuid, event_name, fs,
-                minIf(dt, event_name = 'first_open') OVER (PARTITION BY device_uuid) AS first_open_dt
-                FROM log.app_event
-                WHERE dt >= '2026-04-12'
-            )
-            WHERE first_open_dt IS NOT NULL
-            GROUP BY app_id, first_open_dt
-            ORDER BY first_open_dt ASC
-        ";
+    SELECT
+        main.app_id,        
+        main.dt AS last_dt,
+        uniqIf(device_uuid, event_name = 'first_open') AS first_open,
+        uniqIf(device_uuid, event_name = 'otp_validation_started') AS otp_started,
+        uniqIf(device_uuid, event_name = 'otp_validation_passed') AS otp_passed,
+        uniqIf(device_uuid, event_name = 'liveness_validation_started') AS liveness_started,
+        uniqIf(device_uuid, event_name = 'liveness_validation_passed') AS liveness_passed,
+        uniqIf(device_uuid, event_name = 'id_scan_started') AS ocr_started,
+        uniqIf(device_uuid, event_name = 'id_scan_completed') AS ocr_passed,
+        uniqIf(device_uuid, event_name = 'mobile_auth_passed' AND fs['auth_type'] = 'signup') AS register
+    FROM log.app_event AS main
+    INNER JOIN (
+        SELECT app_id, MAX(dt) AS max_dt
+        FROM log.app_event
+        WHERE length(dt) = 10
+        GROUP BY app_id
+    ) AS latest ON main.app_id = latest.app_id AND main.dt = latest.max_dt
+    WHERE 
+        event_name IN (
+            'first_open', 'otp_validation_started', 'otp_validation_passed', 
+            'liveness_validation_started', 'liveness_validation_passed', 
+            'id_scan_started', 'id_scan_completed', 'mobile_auth_passed'
+        )
+    GROUP BY main.app_id, main.dt
+    ORDER BY main.app_id ASC
+";
 
         $data = Db::select($sql);
 
-        // 4. 遍历结果并填充到 Prometheus 指标中
+        // 4. 遍历处理
         foreach ($data as $row) {
-            $labels = [(string)$row['app_id'], (string)$row['first_open_dt']];
+            $row = (array)$row;
 
-            // 填充原始计数 (Count)
-            $funnelGauge->set((float)$row['first_open'], array_merge($labels, ['first_open']));
-            $funnelGauge->set((float)$row['otp_started'], array_merge($labels, ['otp_started']));
-            $funnelGauge->set((float)$row['otp_passed'], array_merge($labels, ['otp_passed']));
-            $funnelGauge->set((float)$row['liveness_started'], array_merge($labels, ['liveness_started']));
-            $funnelGauge->set((float)$row['liveness_passed'], array_merge($labels, ['liveness_passed']));
-            $funnelGauge->set((float)$row['ocr_started'], array_merge($labels, ['ocr_started']));
-            $funnelGauge->set((float)$row['ocr_passed'], array_merge($labels, ['ocr_passed']));
-            $funnelGauge->set((float)$row['register'], array_merge($labels, ['register']));
+            // 关键改动：labels 只保留 app_id，共 1 个值
+            $labels = [(string)$row['app_id']];
 
-            // 填充转化率 (Rate) - 逻辑直接在 PHP 中计算
-            if ($row['first_open'] > 0) {
-                $rateGauge->set(round($row['register'] / $row['first_open'], 4), array_merge($labels, ['register']));
+            // 填充计数指标：merge 后变为 [app_id, event]，共 2 个值，与注册匹配
+            foreach (array_keys($steps) as $field) {
+                $funnelGauge->set((float)($row[$field] ?? 0), array_merge($labels, [$field]));
             }
-            if ($row['otp_started'] > 0) {
-                $rateGauge->set(round($row['otp_passed'] / $row['otp_started'], 4), array_merge($labels, ['otp']));
-            }
-            if ($row['liveness_started'] > 0) {
-                $rateGauge->set(round($row['liveness_passed'] / $row['liveness_started'], 4), array_merge($labels, ['liveness']));
-            }
-            if ($row['ocr_started'] > 0) {
-                $rateGauge->set(round($row['ocr_passed'] / $row['ocr_started'], 4), array_merge($labels, ['ocr']));
+
+            // 填充转化率指标：确保 setRate 内部处理也是 1+1=2 个标签
+            $this->setRate($rateGauge, $labels, $row, 'register', 'first_open', 'total');
+            $this->setRate($rateGauge, $labels, $row, 'otp_passed', 'otp_started', 'otp');
+            $this->setRate($rateGauge, $labels, $row, 'liveness_passed', 'liveness_started', 'liveness');
+            $this->setRate($rateGauge, $labels, $row, 'ocr_passed', 'ocr_started', 'ocr');
+        }
+
+        // 5. 渲染输出
+        $renderer = new RenderTextFormat();
+        return $response->withHeader('Content-Type', RenderTextFormat::MIME_TYPE . '; charset=utf-8')
+            ->withBody(new SwooleStream($renderer->render($registry->getMetricFamilySamples())));
+    }
+
+    /**
+     * 7日内发生数据统计
+     * @param ResponseInterface $response
+     * @return MessageInterface|\Psr\Http\Message\ResponseInterface
+     * @throws \Prometheus\Exception\MetricsRegistrationException
+     * @throws \Throwable
+     */
+    public function appDay7(ResponseInterface $response): MessageInterface|\Psr\Http\Message\ResponseInterface
+    {
+        // 1. 提前定义步骤映射
+        $steps = [
+            'first_open' => 'first_open',
+            'otp_started' => 'otp_validation_started',
+            'otp_passed' => 'otp_validation_passed',
+            'liveness_started' => 'liveness_validation_started',
+            'liveness_passed' => 'liveness_validation_passed',
+            'ocr_started' => 'id_scan_started',
+            'ocr_passed' => 'id_scan_completed',
+            'register' => 'register',
+        ];
+
+        // 2. 注册指标：标签只定义 [app_id, event]
+        $registry = new CollectorRegistry(new InMemory(), false);
+        $funnelGauge = $registry->getOrRegisterGauge('app', 'day7_count', 'app7日内事件发生计数', ['app_id', 'event']);
+
+        // 3. 执行 ClickHouse SQL (保持逻辑不变，获取每个app_id最新的数据)
+        $sql = "
+          SELECT
+            main.app_id,        
+            main.dt AS last_dt,
+            uniqIf(device_uuid, event_name = 'first_open') AS first_open,
+            uniqIf(device_uuid, event_name = 'otp_validation_started') AS otp_started,
+            uniqIf(device_uuid, event_name = 'otp_validation_passed') AS otp_passed,
+            uniqIf(device_uuid, event_name = 'liveness_validation_started') AS liveness_started,
+            uniqIf(device_uuid, event_name = 'liveness_validation_passed') AS liveness_passed,
+            uniqIf(device_uuid, event_name = 'id_scan_started') AS ocr_started,
+            uniqIf(device_uuid, event_name = 'id_scan_completed') AS ocr_passed,
+            uniqIf(device_uuid, event_name = 'mobile_auth_passed' AND fs['auth_type'] = 'signup') AS register
+        FROM log.app_event AS main
+        WHERE 
+            event_name IN (
+                'first_open', 'otp_validation_started', 'otp_validation_passed', 
+                'liveness_validation_started', 'liveness_validation_passed', 
+                'id_scan_started', 'id_scan_completed', 'mobile_auth_passed'
+            )
+            AND toDateOrNull(dt) >= subtractDays(today(), 7)  -- 扫描最近7天
+            AND length(dt) = 10
+        GROUP BY main.app_id, main.dt
+        ORDER BY main.app_id ASC;
+";
+        $data = Db::select($sql);
+
+        // 4. 遍历处理
+        foreach ($data as $row) {
+            $row = (array)$row;
+
+            // 关键改动：labels 只保留 app_id，共 1 个值
+            $labels = [(string)$row['app_id']];
+
+            // 填充计数指标：merge 后变为 [app_id, event]，共 2 个值，与注册匹配
+            foreach (array_keys($steps) as $field) {
+                $funnelGauge->set((float)($row[$field] ?? 0), array_merge($labels, [$field]));
             }
         }
 
         // 5. 渲染输出
         $renderer = new RenderTextFormat();
-        $output = $renderer->render($registry->getMetricFamilySamples());
+        return $response->withHeader('Content-Type', RenderTextFormat::MIME_TYPE . '; charset=utf-8')
+            ->withBody(new SwooleStream($renderer->render($registry->getMetricFamilySamples())));
+    }
 
-        return $response->withHeader('Content-Type', RenderTextFormat::MIME_TYPE)
-            ->withBody(new SwooleStream($output));
+    /**
+     * 辅助计算转化率
+     */
+    private function setRate($gauge, $labels, $row, $numField, $denField, $type): void
+    {
+        $val = ($row[$denField] > 0) ? round($row[$numField] / $row[$denField], 4) : 0;
+        $gauge->set((float)$val, array_merge($labels, [$type]));
     }
 }

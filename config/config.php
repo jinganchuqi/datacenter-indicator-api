@@ -82,16 +82,6 @@ return [
         'access_token' => \Hyperf\Support\env('DATACENTER_ACCESS_TOKEN'),
         'host' => \Hyperf\Support\env('DATACENTER_PLATFORM_HOST', 'http://172.21.67.59:7225'),
     ],
-    'oss_callback_host' => \Hyperf\Support\env('OSS_CALLBACK_HOST'),
-    'enable_sms_channel_stat' => \Hyperf\Support\env('ENABLE_SMS_CHANNEL_STAT', true),//统计短信注册渠道
-    'session_expire_in' => \Hyperf\Support\env('SESSION_EXPIRE_IN', 86400),// session 会话过期时间默认24h
-    'credit_gp_amount' => (int)\Hyperf\Support\env('CREDIT_GP_AMOUNT'),//GP账号额度
-    'credit_product_id' => \Hyperf\Support\env('CREDIT_PRODUCT_ID'),// 风控产品
-    'credit_fallback_amount' => (int)\Hyperf\Support\env('CREDIT_FALLBACK_AMOUNT', 0),// 风控兜底额度
-    'product_policy_low_amount' => (int)\Hyperf\Support\env('PRODUCT_POLICY_LOW_AMOUNT', 0),// 当剩余额度低于此额度时触发低额度策略
-    'web_repay_enable' => (bool)\Hyperf\Support\env('WEB_REPAY_ENABLE', false),//web还款是否启用
-    'web_repay_link' => \Hyperf\Support\env('WEB_REPAY_LINK'),//web还款链接
-    'collect_id_number_status' => \Hyperf\Support\env('COLLECT_ID_NUMBER_STATUS', true),//启用证件更新
     StdoutLoggerInterface::class => [
         'log_level' => [
             LogLevel::ALERT,
