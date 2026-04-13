@@ -1,0 +1,38 @@
+services:
+  hyperf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: datacenter-consumer:v1.0.0
+    hostname: hyperf
+    restart: always
+    working_dir: /workspace
+    volumes:
+      - /server/datacenter-consumer-api:/workspace
+      - /workspace/vendor
+      - /data/log:/data/log
+    ports:
+      - '9501:9501'
+    environment:
+      - APP_ENV=dev
+      - APP_NAME=datacenter-consumer
+      - SCAN_CACHEABLE=false
+      - REDIS_HOST=172.31.28.218
+      - CLICKHOUSE_HOST=tenant-2123341571-ap-southeast-1.bytehouse.ivolces.com
+      - CLICKHOUSE_PORT=443
+      - CLICKHOUSE_USERNAME=ldwEjqTEME
+      - CLICKHOUSE_PASSWORD=PEU8aODnRw
+      - CLICKHOUSE_DATABASE=loan
+
+    networks:
+      - hyperf-net
+    # 可选：健康检查
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9501/api/ping" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  hyperf-net:
+    driver: bridge

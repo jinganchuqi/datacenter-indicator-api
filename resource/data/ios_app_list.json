@@ -1,0 +1,610 @@
+[
+  {
+    "app_name": "WhatsApp Messenger",
+    "package": "net.whatsapp.WhatsApp"
+  },
+  {
+    "app_name": "BBVA México",
+    "package": "com.bancomer.bbva.bancomermovil"
+  },
+  {
+    "app_name": "Mercado Pago: cuenta digital",
+    "package": "com.mercadopago.MercadoPago"
+  },
+  {
+    "app_name": "NU",
+    "package": "com.nu.iphone"
+  },
+  {
+    "app_name": "CFE Contigo",
+    "package": "com.mx.cfe.cfecontigo"
+  },
+  {
+    "app_name": "Kueski: Compras y Préstamos",
+    "package": "com.kueski.kueskiup"
+  },
+  {
+    "app_name": "DiDi Finanzas",
+    "package": "com.didiglobal.cashloan"
+  },
+  {
+    "app_name": "MexDin: Préstamos de crédito",
+    "package": "com.elaworld.mexloan"
+  },
+  {
+    "app_name": "Plata - Tarjeta de crédito",
+    "package": "dif.tech.bank"
+  },
+  {
+    "app_name": "Aplazo",
+    "package": "mx.aplazo.app.customer.aplazo-ios"
+  },
+  {
+    "app_name": "Tuku -Easy Crédito By Futuro",
+    "package": "com.futuro.tuku"
+  },
+  {
+    "app_name": "TREBEL Music - Download Songs",
+    "package": "com.mmm.projectcarmen"
+  },
+  {
+    "app_name": "Aeromexico",
+    "package": "com.aeromexico.aeromexico"
+  },
+  {
+    "app_name": "PlayStation App",
+    "package": "com.playstation.eu.playstationadhoc"
+  },
+  {
+    "app_name": "Xbox",
+    "package": "com.microsoft.smartglass"
+  },
+  {
+    "app_name": "Adobe Acrobat Reader Crear PDF",
+    "package": "com.adobe.Adobe-Reader"
+  },
+  {
+    "app_name": "Caliente Casino",
+    "package": "com.caliente.CalienteClub"
+  },
+  {
+    "app_name": "YouTube Music",
+    "package": "com.google.ios.youtubemusic"
+  },
+  {
+    "app_name": "PayPal",
+    "package": "com.yourcompany.PPClient"
+  },
+  {
+    "app_name": "Mercado Libre: Compras Online",
+    "package": "com.3mosquitos.MercadoLibre"
+  },
+  {
+    "app_name": "DiDi: Viajes, Comida y Pagos",
+    "package": "com.didi.global.passenger"
+  },
+  {
+    "app_name": "CashMex: Préstamo de crédito",
+    "package": "com.innovacionliquidez.cashmex.app"
+  },
+  {
+    "app_name": "Caliente Deportes",
+    "package": "com.caliente.sports"
+  },
+  {
+    "app_name": "Netflix",
+    "package": "com.netflix.Netflix"
+  },
+  {
+    "app_name": "Uber: Autos, motos, taxi y más",
+    "package": "com.ubercab.UberClient"
+  },
+  {
+    "app_name": "Pinterest",
+    "package": "pinterest"
+  },
+  {
+    "app_name": "Amazon Compras en Línea",
+    "package": "com.amazon.Amazon"
+  },
+  {
+    "app_name": "BanCoppel",
+    "package": "com.bancoppel.BancoppelExpress"
+  },
+  {
+    "app_name": "Mi Cuenta Infonavit Móvil",
+    "package": "org.infonavit.mcimovil"
+  },
+  {
+    "app_name": "AforeMóvil",
+    "package": "mx.com.procesar.aforemovil"
+  },
+  {
+    "app_name": "GBM",
+    "package": "com.gbm.app"
+  },
+  {
+    "app_name": "Banorte Móvil",
+    "package": "com.banorte.Banorte-Movil"
+  },
+  {
+    "app_name": "Broxel",
+    "package": "com.broxel.four"
+  },
+  {
+    "app_name": "Pluxee Mexico",
+    "package": "com.sodexo.consumers.mexico"
+  },
+  {
+    "app_name": "ALA - Préstamos de crédito",
+    "package": "prestamo.dinero.ala"
+  },
+  {
+    "app_name": "Ualá",
+    "package": "com.bancar.uala"
+  },
+  {
+    "app_name": "El correo electr. de Google",
+    "package": "com.google.Gmail"
+  },
+  {
+    "app_name": "Rappi - Pide Todo en Minutos",
+    "package": "com.grability.rappi"
+  },
+  {
+    "app_name": "Disney+",
+    "package": "com.disney.disneyplus"
+  },
+  {
+    "app_name": "Instagram",
+    "package": "com.burbn.instagram"
+  },
+  {
+    "app_name": "Microsoft Outlook",
+    "package": "com.microsoft.Office.Outlook"
+  },
+  {
+    "app_name": "Uber Eats - Comida a Domicilio",
+    "package": "com.ubercab.UberEats"
+  },
+  {
+    "app_name": "Mi Telcel",
+    "package": "com.telcel.Mi-Telcel"
+  },
+  {
+    "app_name": "Liverpool: Compra en línea",
+    "package": "mx.com.liverpool.appcliente"
+  },
+  {
+    "app_name": "Microsoft Teams",
+    "package": "com.microsoft.skype.teams"
+  },
+  {
+    "app_name": "Walmart - Walmart Express - MX",
+    "package": "com.walmartmexico.WalmartMG"
+  },
+  {
+    "app_name": "Microsoft Excel",
+    "package": "com.microsoft.Office.Excel"
+  },
+  {
+    "app_name": "Candy Crush Saga",
+    "package": "com.midasplayer.apps.candycrushsaga"
+  },
+  {
+    "app_name": "Sticker.ly - Sticker Maker",
+    "package": "com.snowcorp.stickerly"
+  },
+  {
+    "app_name": "Amazon Alexa",
+    "package": "com.amazon.echo"
+  },
+  {
+    "app_name": null,
+    "package": null
+  },
+  {
+    "app_name": "Adobe Acrobat Reader Crear PDF",
+    "package": "com.adobe.Adobe-Reader"
+  },
+  {
+    "app_name": "Affluente Financiero",
+    "package": "com.affluente.financiero.safe"
+  },
+  {
+    "app_name": "Amazon Compras en Línea",
+    "package": "com.amazon.Amazon"
+  },
+  {
+    "app_name": "Amazon Prime Video",
+    "package": "com.amazon.aiv.AIVApp"
+  },
+  {
+    "app_name": "Aplazo",
+    "package": "mx.aplazo.app.customer.aplazo-ios"
+  },
+  {
+    "app_name": "BBVA México",
+    "package": "com.bancomer.bbva.bancomermovil"
+  },
+  {
+    "app_name": "Blankfein Préstamos",
+    "package": "com.applesimple"
+  },
+  {
+    "app_name": "Caliente Casino",
+    "package": "com.caliente.CalienteClub"
+  },
+  {
+    "app_name": "Cashi",
+    "package": "com.walmartmexico.wallet"
+  },
+  {
+    "app_name": "CashMex: Préstamo de crédito",
+    "package": "com.innovacionliquidez.cashmex.app"
+  },
+  {
+    "app_name": "CFE Contigo",
+    "package": "com.mx.cfe.cfecontigo"
+  },
+  {
+    "app_name": "Cinépolis GO",
+    "package": "com.cinepolis.go"
+  },
+  {
+    "app_name": "DiDi Finanzas",
+    "package": "com.didiglobal.cashloan"
+  },
+  {
+    "app_name": "DiDi Food: Comida a Domicilio",
+    "package": "com.xiaojukeji.didi.global.customer"
+  },
+  {
+    "app_name": "DiDi: Viajes, Comida y Pagos",
+    "package": "com.didi.global.passenger"
+  },
+  {
+    "app_name": "Disney+",
+    "package": "com.disney.disneyplus"
+  },
+  {
+    "app_name": "Flo ciclo menstrual y periodo",
+    "package": "org.iggymedia.periodtracker"
+  },
+  {
+    "app_name": "inDrive - Viajes y Envío",
+    "package": "ru.inDriver-ru"
+  },
+  {
+    "app_name": "izzi",
+    "package": "mx.izzi.izzi.App"
+  },
+  {
+    "app_name": "Klar: Crédito, Ahorro y Pago",
+    "package": "mx.klar.app"
+  },
+  {
+    "app_name": "Kueski: Compras y Préstamos",
+    "package": "com.kueski.kueskiup"
+  },
+  {
+    "app_name": "Liverpool: Compra en línea",
+    "package": "mx.com.liverpool.appcliente"
+  },
+  {
+    "app_name": "Mercado Libre: Compras Online",
+    "package": "com.3mosquitos.MercadoLibre"
+  },
+  {
+    "app_name": "Mercado Pago: cuenta digital",
+    "package": "com.mercadopago.MercadoPago"
+  },
+  {
+    "app_name": "Mexcredito",
+    "package": "org.ByteCooper.Mexcredito"
+  },
+  {
+    "app_name": "MexDin: Préstamos de crédito",
+    "package": "com.elaworld.mexloan"
+  },
+  {
+    "app_name": "Mi AT&T",
+    "package": "com.att.miatt"
+  },
+  {
+    "app_name": "Mi Telcel",
+    "package": "com.telcel.Mi-Telcel"
+  },
+  {
+    "app_name": "Microsoft Excel",
+    "package": "com.microsoft.Office.Excel"
+  },
+  {
+    "app_name": "Microsoft Outlook",
+    "package": "com.microsoft.Office.Outlook"
+  },
+  {
+    "app_name": "Microsoft Teams",
+    "package": "com.microsoft.skype.teams"
+  },
+  {
+    "app_name": "Moneyman: Créditos y préstamos",
+    "package": "mx.moneyman"
+  },
+  {
+    "app_name": "Novacard - Tarjeta de Crédito",
+    "package": "mx.nova"
+  },
+  {
+    "app_name": "NU",
+    "package": "com.nu.iphone"
+  },
+  {
+    "app_name": "Plata - Tarjeta de crédito",
+    "package": "dif.tech.bank"
+  },
+  {
+    "app_name": "Playdoit",
+    "package": "mx.playdoit.app"
+  },
+  {
+    "app_name": "Rappi - Pide Todo en Minutos",
+    "package": "com.grability.rappi"
+  },
+  {
+    "app_name": "SAT Móvil",
+    "package": "mx.gob.sat.satmovilios"
+  },
+  {
+    "app_name": "Somos Crédito",
+    "package": "com.somostu"
+  },
+  {
+    "app_name": "stori",
+    "package": "ai.powerup.stori"
+  },
+  {
+    "app_name": "TENGO! By Broxel",
+    "package": "com.tengovales.app"
+  },
+  {
+    "app_name": "The Roku App (Official)",
+    "package": "com.roku.ios.roku"
+  },
+  {
+    "app_name": "TREBEL Music - Download Songs",
+    "package": "com.mmm.projectcarmen"
+  },
+  {
+    "app_name": "Tuku -Easy Crédito By Futuro",
+    "package": "com.futuro.tuku"
+  },
+  {
+    "app_name": "Uber Eats - Comida a Domicilio",
+    "package": "com.ubercab.UberEats"
+  },
+  {
+    "app_name": "Uber: Autos, motos, taxi y más",
+    "package": "com.ubercab.UberClient"
+  },
+  {
+    "app_name": "Walmart - Walmart Express - MX",
+    "package": "com.walmartmexico.WalmartMG"
+  },
+  {
+    "app_name": "Waze Navegación y Tráfico",
+    "package": "com.waze.iphone"
+  },
+  {
+    "app_name": "WhatsApp Messenger",
+    "package": "net.whatsapp.WhatsApp"
+  },
+  {
+    "app_name": "Zoom Workplace",
+    "package": "us.zoom.videomeetings"
+  },
+  {
+    "app_name": null,
+    "package": null
+  },
+  {
+    "app_name": "Adobe Acrobat Reader Crear PDF",
+    "package": "com.adobe.Adobe-Reader"
+  },
+  {
+    "app_name": "Amazon Compras en Línea",
+    "package": "com.amazon.Amazon"
+  },
+  {
+    "app_name": "Plata - Tarjeta de crédito",
+    "package": "dif.tech.bank"
+  },
+  {
+    "app_name": "Aplazo",
+    "package": "mx.aplazo.app.customer.aplazo-ios"
+  },
+  {
+    "app_name": "DiDi Food: Comida a Domicilio",
+    "package": "com.xiaojukeji.didi.global.customer"
+  },
+  {
+    "app_name": "WhatsApp Messenger",
+    "package": "net.whatsapp.WhatsApp"
+  },
+  {
+    "app_name": "DiDi: Viajes, Comida y Pagos",
+    "package": "com.didi.global.passenger"
+  },
+  {
+    "app_name": "Disney+",
+    "package": "com.disney.disneyplus"
+  },
+  {
+    "app_name": "DiDi Food: Comida a Domicilio",
+    "package": "com.xiaojukeji.didi.global.customer"
+  },
+  {
+    "app_name": "MexDin: Préstamos de crédito",
+    "package": "com.elaworld.mexloan"
+  },
+  {
+    "app_name": "Hojas de cálculo de Google",
+    "package": "com.google.Sheets"
+  },
+  {
+    "app_name": "Liverpool: Compra en línea",
+    "package": "mx.com.liverpool.appcliente"
+  },
+  {
+    "app_name": "izzi",
+    "package": "mx.izzi.izzi.App"
+  },
+  {
+    "app_name": "Mercado Libre: Compras Online",
+    "package": "com.3mosquitos.MercadoLibre"
+  },
+  {
+    "app_name": "Kueski: Compras y Préstamos",
+    "package": "com.kueski.kueskiup"
+  },
+  {
+    "app_name": "Mexcredito",
+    "package": "org.ByteCooper.Mexcredito"
+  },
+  {
+    "app_name": "Mi AT&T",
+    "package": "com.att.miatt"
+  },
+  {
+    "app_name": "Mi Telcel",
+    "package": "com.telcel.Mi-Telcel"
+  },
+  {
+    "app_name": "Microsoft Excel",
+    "package": "com.microsoft.Office.Excel"
+  },
+  {
+    "app_name": "SAT Móvil",
+    "package": "mx.gob.sat.satmovilios"
+  },
+  {
+    "app_name": "DiDi Finanzas",
+    "package": "com.didiglobal.cashloan"
+  },
+  {
+    "app_name": "Spin by OXXO",
+    "package": "com.pagopopmobile"
+  },
+  {
+    "app_name": "stori",
+    "package": "ai.powerup.stori"
+  },
+  {
+    "app_name": "Cashi",
+    "package": "com.walmartmexico.wallet"
+  },
+  {
+    "app_name": "NU",
+    "package": "com.nu.iphone"
+  },
+  {
+    "app_name": "Microsoft Teams",
+    "package": "com.microsoft.skype.teams"
+  },
+  {
+    "app_name": "Pinterest",
+    "package": "pinterest"
+  },
+  {
+    "app_name": "CashMex: Préstamo de crédito",
+    "package": "com.innovacionliquidez.cashmex.app"
+  },
+  {
+    "app_name": "Shopee: 12.12 La última Promo",
+    "package": "com.beeasy.shopee.mx"
+  },
+  {
+    "app_name": "TREBEL Music - Download Songs",
+    "package": "com.mmm.projectcarmen"
+  },
+  {
+    "app_name": "Uber Eats - Comida a Domicilio",
+    "package": "com.ubercab.UberEats"
+  },
+  {
+    "app_name": "Walmart - Walmart Express - MX",
+    "package": "com.walmartmexico.WalmartMG"
+  },
+  {
+    "app_name": "Klar: Crédito, Ahorro y Pago",
+    "package": "mx.klar.app"
+  },
+  {
+    "app_name": "Waze Navegación y Tráfico",
+    "package": "com.waze.iphone"
+  },
+  {
+    "app_name": "Blankfein Préstamos",
+    "package": "com.applesimple"
+  },
+  {
+    "app_name": "Tuku -Easy Crédito By Futuro",
+    "package": "com.futuro.tuku"
+  },
+  {
+    "app_name": "Somos Crédito",
+    "package": "com.somostu"
+  },
+  {
+    "app_name": "Affluente Financiero",
+    "package": "com.affluente.financiero.safe"
+  },
+  {
+    "app_name": "Moneyman: Créditos y préstamos",
+    "package": "mx.moneyman"
+  },
+  {
+    "app_name": "Zoom Workplace",
+    "package": "us.zoom.videomeetings"
+  },
+  {
+    "app_name": "Caliente Casino",
+    "package": "com.caliente.CalienteClub"
+  },
+  {
+    "app_name": "bet365 - Sports Betting",
+    "package": "com.bet365.bet365Wrapper"
+  },
+  {
+    "app_name": "Playdoit",
+    "package": "mx.playdoit.app"
+  },
+  {
+    "app_name": "Jackpot Party Casino Slots",
+    "package": "com.williamsinteractive.jackpotparty"
+  },
+  {
+    "app_name": "Codere: Apuestas Deportivas MX",
+    "package": "mx.codere.apuestas"
+  },
+  {
+    "app_name": "cydia",
+    "package": "com.saurik.Cydia"
+  },
+  {
+    "app_name": "unc0ver",
+    "package": "science.xnu.undecimus"
+  },
+  {
+    "app_name": "vpnmaster",
+    "package": "ios.vpnmaster.proxy"
+  },
+  {
+    "app_name": "VPN - Super Unlimited Proxy",
+    "package": "mobi.mobilejump.freevpn"
+  },
+  {
+    "app_name": "Checkra1n",
+    "package": "com.blizzard.checkra1n"
+  }
+]
