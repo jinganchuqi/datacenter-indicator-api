@@ -107,12 +107,13 @@ class MessageAlert
      * @throws AppException
      */
     public static function send(
-        string $alertId,
-        array  $data,
-        string $ip = '',
-        string $serviceName = '',
-        string $trackId = '',
-        string $developerName = '',
+        string     $alertId,
+        array      $data,
+        array|null $alertUserId = null,
+        string     $ip = '',
+        string     $serviceName = '',
+        string     $trackId = '',
+        string     $developerName = ''
     ): array
     {
         $json = [
@@ -123,6 +124,7 @@ class MessageAlert
             'serviceName' => $serviceName,
             'developerName' => $developerName,
             'data' => $data,
+            'alertUserId' => $alertUserId
         ];
         self::log($json);
         $str = json_encode($json, 320);
@@ -197,9 +199,9 @@ class MessageAlert
     protected static function log($str): void
     {
         if (is_array($str)) {
-            WLog::error("告警发送", $str);
+            WLog::info("告警发送", $str);
         } else {
-            WLog::error("告警发送:{$str}");
+            WLog::info("告警发送:{$str}");
         }
     }
 

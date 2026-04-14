@@ -34,7 +34,7 @@ class AlertController extends AbstractController
             $status = "processing";//处理中
         }
         $alertData = [
-            'country' => $country,//所在国家
+            'country' => strtolower($country),//所在国家
             'type' => $alarm['is_recovered'] === true ? 'recovered' : 'alert',
             'status' => $status,//状态
             'name' => $alarm['rule_name'],//规则名称
@@ -49,8 +49,17 @@ class AlertController extends AbstractController
             'confirm_username' => !empty($confirmUserName) ? $confirmUserName : '',//认领人
             'duration' => $this->formatDuration($endTime - $alarm['first_trigger_time']),//持续时长
         ];
-        $result = MessageAlert::send("INDICATOR_ALERT", $alertData);
-        return $this->success($result);
+        $alertUserId = null;
+        if (!empty($json['dutyUsers'])) {
+            foreach ($json['dutyUsers'] as $dutyUser) {
+                $alertUserId[] = $dutyUser['userid'];
+            }
+        }
+        $result = MessageAlert::send("INDICATOR_ALERT", $alertData, $alertUserId);
+        return $this->success([
+            'result' => $result,
+            'alertId' => $alertUserId,
+        ]);
     }
 
     /**

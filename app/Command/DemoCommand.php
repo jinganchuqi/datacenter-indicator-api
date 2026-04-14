@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Exception\AppException;
 use App\Job\SyncRiskDataJob;
 use App\Library\HashTableUtil;
-use App\Library\WDb2;
 use App\Service\DecidePlatformData\DecidePlatformDataService;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
@@ -64,5 +63,29 @@ class DemoCommand extends HyperfCommand
             "data" => json_encode(['test' => 1]),
         ]);
         echo 1222;
+    }
+
+    public function app()
+    {
+        $apps = [
+            528,
+            529,
+            533,
+            555,
+            561,
+            562,
+            564,
+            567,
+            568,
+            569,
+            571,
+            572,
+            573,
+        ];
+        foreach ($apps as $app) {
+            WDb::execute("INSERT INTO conf.app (`id`, `bid`, `app_group_id`, `country`) values (?,?,?,?)", [$app, 'NG01', $app, 'NG']);
+        }
+        echo 2333;
+        return;
     }
 }
