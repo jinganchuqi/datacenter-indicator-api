@@ -33,6 +33,10 @@ class AlertController extends AbstractController
         if ($alarm['confirmState']['isOk'] && $status == 'alerting') {
             $status = "processing";//处理中
         }
+        $value = arr_get($alarm, 'labels.value');
+        if (is_float($value)) {
+            $value = round($value, 2);
+        }
         $alertData = [
             'country' => strtolower($country),//所在国家
             'type' => $alarm['is_recovered'] === true ? 'recovered' : 'alert',
@@ -42,7 +46,7 @@ class AlertController extends AbstractController
             'rule' => $alarm['annotations'],//规则详情
             'pattern' => $alarm['searchQL'],//触发条件
             'level' => $alarm['severity'],//等级
-            'value' => arr_get($alarm, 'labels.value'),//当前值
+            'value' => $value,//当前值
             'start_time' => date('Y-m-d H:i:s', $alarm['first_trigger_time']),//触发时间
             'end_time' => date('Y-m-d H:i:s', $endTime),//持续时间/恢复时间
             'confirm_time' => !empty($confirmTime) ? date('Y-m-d H:i:s', $confirmTime) : '',//认领时间
