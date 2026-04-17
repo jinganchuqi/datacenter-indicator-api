@@ -14,7 +14,7 @@ $appConfig = loadAppConfig();
 
 return [
     'default' => [
-        'driver' => \Hyperf\Support\env('DB_QUERY_DRIVER', 'mysql'),
+        'driver' => \Hyperf\Support\env('DB_DRIVER', 'mysql'),
         'host' => \Hyperf\Support\env('CLICKHOUSE_HOST', get_value($appConfig, 'database.query.host')),
         'database' => \Hyperf\Support\env('CLICKHOUSE_DATABASE', get_value($appConfig, 'database.analyse.database')),
         'port' => \Hyperf\Support\env('CLICKHOUSE_PORT', get_value($appConfig, 'database.query.port')),
@@ -22,8 +22,8 @@ return [
         'password' => \Hyperf\Support\env('CLICKHOUSE_PASSWORD', get_value($appConfig, 'database.query.password')),
         'charset' => \Hyperf\Support\env('CLICKHOUSE_CHARSET', get_value($appConfig, 'database.query.charset')),
         'collation' => \Hyperf\Support\env('CLICKHOUSE_COLLATION', 'utf8mb4_unicode_ci'),
-        'prefix' => \Hyperf\Support\env('DB_QUERY_PREFIX', ''),
-        'timezone' => \Hyperf\Support\env('DB_QUERY_TIMEZONE', get_value($appConfig, 'database.analyse.timezone')),
+        'prefix' => \Hyperf\Support\env('DB_PREFIX', ''),
+        'timezone' => \Hyperf\Support\env('DB_TIMEZONE', get_value($appConfig, 'database.analyse.timezone')),
         'pool' => [
             'min_connections' => 1,
             'max_connections' => 40,
@@ -38,16 +38,16 @@ return [
         ],
     ],
     'mysql' => [
-        'driver' => \Hyperf\Support\env('DB_QUERY_DRIVER', 'mysql'),
-        'host' => \Hyperf\Support\env('DB_QUERY_HOST', get_value($appConfig, 'database.query.host')),
-        'database' => \Hyperf\Support\env('DB_QUERY_DATABASE', get_value($appConfig, 'database.analyse.database')),
-        'port' => \Hyperf\Support\env('DB_QUERY_PORT', get_value($appConfig, 'database.query.port')),
-        'username' => \Hyperf\Support\env('DB_QUERY_USERNAME', get_value($appConfig, 'database.query.username')),
-        'password' => \Hyperf\Support\env('DB_QUERY_PASSWORD', get_value($appConfig, 'database.query.password')),
-        'charset' => \Hyperf\Support\env('DB_QUERY_CHARSET', get_value($appConfig, 'database.query.charset')),
-        'collation' => \Hyperf\Support\env('DB_QUERY_COLLATION', 'utf8mb4_unicode_ci'),
-        'prefix' => \Hyperf\Support\env('DB_QUERY_PREFIX', ''),
-        'timezone' => \Hyperf\Support\env('DB_QUERY_TIMEZONE', get_value($appConfig, 'database.analyse.timezone')),
+        'driver' => \Hyperf\Support\env('DB_DRIVER', 'mysql'),
+        'host' => \Hyperf\Support\env('DB_HOST', get_value($appConfig, 'database.query.host')),
+        'database' => 'temp',
+        'port' => \Hyperf\Support\env('DB_PORT', get_value($appConfig, 'database.query.port')),
+        'username' => \Hyperf\Support\env('DB_USERNAME', get_value($appConfig, 'database.query.username')),
+        'password' => \Hyperf\Support\env('DB_PASSWORD', get_value($appConfig, 'database.query.password')),
+        'charset' => \Hyperf\Support\env('DB_CHARSET', get_value($appConfig, 'database.query.charset')),
+        'collation' => \Hyperf\Support\env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+        'prefix' => \Hyperf\Support\env('DB_PREFIX', ''),
+        'timezone' => \Hyperf\Support\env('DB_TIMEZONE', get_value($appConfig, 'database.analyse.timezone')),
         'pool' => [
             'min_connections' => 1,
             'max_connections' => 40,
